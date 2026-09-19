@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Git Learning Sections | GitPath</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: { fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"] }, colors: { ink: "#172033" } } } };
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #fbfcfa; color: #172033; }
+      .section-card { transition: transform .25s ease, box-shadow .25s ease; }
+      .section-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(33,57,75,.10); }
+      .detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s ease; }
+      .detail > div { overflow: hidden; }
+      .section-card.open .detail { grid-template-rows: 1fr; }
+      .section-card.open .chevron { transform: rotate(180deg); }
+    </style>
+  </head>
+  <body class="antialiased">
+    <header class="border-b border-slate-200 bg-white/90 px-5 py-4 backdrop-blur sm:px-8">
+      <nav class="mx-auto flex max-w-6xl items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 font-bold tracking-tight"><span class="grid h-9 w-9 place-items-center rounded-xl bg-ink text-white"><i data-lucide="git-branch" class="h-5 w-5"></i></span>GitPath</a>
+        <a href="index.html#roadmap" class="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-slate-800"><i data-lucide="arrow-left" class="h-4 w-4"></i>Back to roadmap</a>
+      </nav>
+    </header>
+    <main class="px-5 py-14 sm:px-8 sm:py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-xs font-bold uppercase tracking-[.18em] text-teal-700">The complete course</p>
+        <div class="mt-3 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div><h1 class="text-4xl font-black tracking-[-.04em] sm:text-5xl">All learning sections</h1><p class="mt-3 max-w-2xl text-lg leading-7 text-slate-600">Open any lesson to see the key idea, commands, and a practical next move.</p></div>
+          <a href="index.html#roadmap" class="text-sm font-bold text-teal-700 hover:text-teal-800">Follow the visual roadmap →</a>
+        </div>
+        <div id="sections" class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+      </div>
+    </main>
+    <footer class="border-t border-slate-200 bg-white px-5 py-10 sm:px-8">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div><a href="index.html" class="flex items-center gap-2 font-bold tracking-tight"><span class="grid h-8 w-8 place-items-center rounded-xl bg-ink text-white"><i data-lucide="git-branch" class="h-4 w-4"></i></span>GitPath</a><p class="mt-2 text-sm text-slate-500">A calm place to learn your Git workflow.</p></div>
+        <div class="flex gap-6 text-sm font-semibold text-slate-600"><a href="index.html" class="hover:text-teal-700">Home</a><a href="index.html#roadmap" class="hover:text-teal-700">Roadmap</a></div>
+        <p class="text-sm text-slate-400">Built for your first push.</p>
+      </div>
+    </footer>
+    <script>
+      const sections = [
+        ['What is Git?', 'Foundation', 'book-open', 'emerald', 'Git records meaningful snapshots of your project so you can work safely and understand every change.', 'git --version'],
+        ['Requirements', 'Get ready', 'wrench', 'cyan', 'Install Git and VS Code, then configure the name and email that appear on your commits.', 'git config --global user.name "Your Name"'],
+        ['Project Setup', 'Start', 'folder-plus', 'blue', 'Create a focused project folder, then open it in your editor and terminal.', 'mkdir my-first-project'],
+        ['Create & Track', 'Core workflow', 'file-plus-2', 'violet', 'Initialize a repository and stage the changes you want in your next snapshot.', 'git init  ·  git add .'],
+        ['Commit', 'First milestone', 'save', 'orange', 'Save staged work with a short, specific message that tells the project story.', 'git commit -m "Create landing page"'],
+        ['Deployment', 'Go live', 'rocket', 'rose', 'Connect GitHub to Vercel or Netlify so each push can trigger a deploy.', 'git push -u origin main'],
+        ['Production', 'Ship with confidence', 'globe-2', 'blue', 'Use a stable main branch and preview changes before they reach your public site.', 'git push'],
+        ['Git Essentials', 'Daily tools', 'sparkles', 'emerald', 'Keep secrets and generated files out with .gitignore, then clone projects when needed.', 'git clone <repository-url>'],
+        ['Branches & Collaboration', 'Team workflow', 'git-branch', 'violet', 'Build features in branches, merge reviewed work, and collaborate through pull requests.', 'git branch feature/navbar  ·  git merge feature/navbar']
+      ];
+      const shades = { emerald:['bg-emerald-50','border-emerald-100','text-emerald-800'], cyan:['bg-cyan-50','border-cyan-100','text-cyan-800'], blue:['bg-blue-50','border-blue-100','text-blue-800'], violet:['bg-violet-50','border-violet-100','text-violet-800'], orange:['bg-orange-50','border-orange-100','text-orange-800'], rose:['bg-rose-50','border-rose-100','text-rose-800'] };
+      document.getElementById('sections').innerHTML = sections.map((item, i) => { const [title, tag, icon, color, text, command] = item, c = shades[color]; return `<article class="section-card rounded-3xl border ${c[1]} ${c[0]} p-5"><button class="open-button w-full text-left" aria-expanded="false"><div class="flex items-start justify-between gap-4"><span class="grid h-10 w-10 place-items-center rounded-xl bg-white ${c[2]} shadow-sm"><i data-lucide="${icon}" class="h-5 w-5"></i></span><i data-lucide="chevron-down" class="chevron h-5 w-5 text-slate-400 transition-transform"></i></div><p class="mt-6 text-xs font-bold uppercase tracking-wider ${c[2]}">Step ${String(i+1).padStart(2,'0')} · ${tag}</p><h2 class="mt-2 text-xl font-black tracking-tight">${title}</h2></button><div class="detail"><div><p class="mt-4 border-t border-slate-200/70 pt-4 text-sm leading-6 text-slate-600">${text}</p><code class="mt-4 block rounded-xl bg-slate-900 px-3 py-2.5 text-xs font-bold text-teal-300">$ ${command}</code></div></div></article>`; }).join('');
+      document.querySelectorAll('.open-button').forEach(button => button.addEventListener('click', () => { const card = button.closest('.section-card'), open = card.classList.toggle('open'); button.setAttribute('aria-expanded', open); }));
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
